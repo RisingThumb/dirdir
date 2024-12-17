@@ -23,8 +23,12 @@ fn dirdir_init {
             handler_body_main=(tpl_handler `{get_lib_file dirdir/delete_sure.tpl apps/dirdir/delete_sure.tpl})
         if not if(~ 1 $#post_arg_dirdir_delete_folder && ! ~ $#post_arg_dirdir_delete_yes 1)
             handler_body_main=(tpl_handler `{get_lib_file dirdir/delete_sure.tpl apps/dirdir/delete_sure.tpl})
+        if not if(~ 1 $#post_arg_dirdir_delete_file && ! ~ $#post_arg_dirdir_delete_yes 1)
+            handler_body_main=(tpl_handler `{get_lib_file dirdir/delete_sure.tpl apps/dirdir/delete_sure.tpl})
         if not if(~ 1 $#post_arg_dirdir_delete && ! ~ $#post_arg_dirdir_delete_yes 0)
             rm $dirdir_file
+        if not if(~ 1 $#post_arg_dirdir_delete_file && ! ~ $#post_arg_dirdir_delete_yes 0)
+            rm `{dirname $dirdir_file}^'/'^$post_arg_dirdir_delete_file_name
         if not if(~ 1 $#post_arg_dirdir_delete_folder && ! ~ $#post_arg_dirdir_delete_yes 0)
             rm -rf `{dirname $dirdir_file}
         if not if(~ 1 $#post_arg_dirdir_add_child_file && ! ~ $#post_arg_dirdir_search 0)

@@ -11,6 +11,11 @@
 </form>
 
 <form action="" method="POST" enctype="multipart/form-data">
+<input type="search" id="test-search" name="dirdir_delete_file_name" placeholder="File to delete"/><br/>
+<input type="submit" name="dirdir_delete_file" value="Delete file" /><br/><hr />
+</form>
+
+<form action="" method="POST" enctype="multipart/form-data">
 <input type="search" id="test-search" name="dirdir_search" placeholder="Page or folder to add"/><br/>
 <input type="submit" name="dirdir_add_child_file" value="New Page" /><br/>
 <input type="submit" name="dirdir_add_child_folder" value="New Folder" /><hr />
