@@ -16,13 +16,18 @@
 </form>
 
 <form action="" method="POST" enctype="multipart/form-data">
-<input type="search" id="test-search" name="dirdir_search" placeholder="Page or folder to add"/><br/>
+<input type="search" id="test-search" name="dirdir_search" placeholder="Page or folder to add" required/><br/>
 <input type="submit" name="dirdir_add_child_file" value="New Page" /><br/>
 <input type="submit" name="dirdir_add_child_folder" value="New Folder" /><hr />
 </form>
 
 <form action="" method="POST" enctype="multipart/form-data">
-<input type="file" name="dirdir_upload_file" /><br />
+<input type="file" name="dirdir_upload_file" required/><br />
 <input type="search" id="test-search" name="dirdir_file_name" placeholder="File name including extension"/><br/>
 <input type="submit" name="dirdir_upload_file_pressed" value="Upload file" /><hr />
+</form>
+
+<form action="" method="POST" enctype="multipart/form-data">
+<input type="file" name="dirdir_upload_file_multiple" multiple/><br />
+<input type="submit" name="dirdir_upload_file_pressed_multiple" value="Upload multiple files"/><hr />
 </form>

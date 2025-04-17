@@ -39,6 +39,25 @@ fn dirdir_init {
             mv /tmp/werc_file.*.data `{dirname $dirdir_file}^'/'^$post_arg_dirdir_file_name
         if not if(~ 1 $#post_arg_dirdir_upload_file_pressed && ! ~ $#post_arg_dirdir_upload_file 0)
             mv /tmp/werc_file.*.data `{dirname $dirdir_file}^'/'^$post_arg_dirdir_upload_file
+        if not if(~ 1 $#post_arg_dirdir_upload_file_pressed_multiple && ! ~ $#post_arg_dirdir_upload_file_multiple 0)
+            for (file in /tmp/werc_file.*.data) {
+                switch(`{file -bi $file}) {
+                    case image/png* 
+                        convert $file -resize '1920x1080' -background '#ffffff00' -gravity center -extent 1920x1080 $file.webp
+                        mv $file.webp `{dirname $dirdir_file}^'/'^`{cat /dev/urandom | tr -cd 'a-f0-9' | head -c 32}^'.webp'
+
+                    case image/jpeg*
+                        convert $file -resize '1920x1080' -background '#ffffff00' -gravity center -extent 1920x1080 $file.webp
+                        mv $file.webp `{dirname $dirdir_file}^'/'^`{cat /dev/urandom | tr -cd 'a-f0-9' | head -c 32}^'.webp'
+
+                    case image/gif*
+                        mv $file `{dirname $dirdir_file}^'/'^`{cat /dev/urandom | tr -cd 'a-f0-9' | head -c 32}^'.gif'
+
+                    case *
+                        ext='png'#`{grep `{file -b --mime-type $file} /etc/mime.types | awk "{print $2}"}
+                        mv $file `{dirname $dirdir_file}^'/'^`{cat /dev/urandom | tr -cd 'a-f0-9' | head -c 32}
+                }
+        }
         if not if(! ~ '' $"post_arg_dirdir_save $"post_arg_edit_text)
             save_page
 
