@@ -61,8 +61,7 @@ fn dirdir_init {
         if not if(! ~ '' $"post_arg_dirdir_save $"post_arg_edit_text)
             save_page
 
-        if not if(~ $"handler_body_main  '' || {~ $REQUEST_METHOD GET && test -f $local_path.md} || {~ $REQUEST_METHOD GET && test -f $local_path.tpl} )
-            ll_add handlers_bar_left tpl_handler apps/dirdir/sidebar_controls.tpl
+        ll_addh handlers_bar_left tpl_handler apps/dirdir/sidebar_controls.tpl
     }
 }
 

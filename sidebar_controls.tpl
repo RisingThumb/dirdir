@@ -23,7 +23,8 @@
 
 <form action="" method="POST" enctype="multipart/form-data">
 <input type="file" name="dirdir_upload_file" required/><br />
-<input type="search" id="test-search" name="dirdir_file_name" placeholder="File name including extension"/><br/>
+<input type="search" id="test-search" name="dirdir_file_name" placeholder="File name including extension"/>
+<br/>
 <input type="submit" name="dirdir_upload_file_pressed" value="Upload file" /><hr />
 </form>
 
