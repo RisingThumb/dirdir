@@ -74,5 +74,8 @@ fn save_page {
     echo $logged_user > $dirdir_verdir/author
     echo $post_arg_edit_text | dos2unix > $dirdir_verdir/data 
     echo $post_arg_edit_text | dos2unix > $dirdir_file
+    if (! ~ $#enable_metadata 0) {
+        prepare_metadata
+    }
     post_redirect $base_url^$req_path
 }
