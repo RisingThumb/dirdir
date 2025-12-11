@@ -33,7 +33,7 @@ fn dirdir_init {
             rm -rf `{dirname $dirdir_file}
         if not if(~ 1 $#post_arg_dirdir_add_child_file && ! ~ $#post_arg_dirdir_search 0)
             touch `{dirname $dirdir_file}^'/'^$post_arg_dirdir_search^'.md'
-        if not if(~ 1 $#post_arg_dirdir_add_child_folder! ~ $#post_arg_dirdir_search 0)
+        if not if(~ 1 $#post_arg_dirdir_add_child_folder && ! ~ $#post_arg_dirdir_search 0)
             mkdir `{dirname $dirdir_file}^'/'^$post_arg_dirdir_search
         if not if(~ 1 $#post_arg_dirdir_upload_file_pressed && ! ~ $#post_arg_dirdir_file_name 0 && ! ~ $post_arg_dirdir_file_name "" && ! ~ $#post_arg_dirdir_upload_file 0)
             mv /tmp/werc_file.*.data `{dirname $dirdir_file}^'/'^$post_arg_dirdir_file_name
@@ -47,6 +47,10 @@ fn dirdir_init {
                         mv $file.webp `{dirname $dirdir_file}^'/'^`{cat /dev/urandom | tr -cd 'a-f0-9' | head -c 32}^'.webp'
 
                     case image/jpeg*
+                        convert $file -resize '1920x1080' -background '#ffffff00' -gravity center -extent 1920x1080 $file.webp
+                        mv $file.webp `{dirname $dirdir_file}^'/'^`{cat /dev/urandom | tr -cd 'a-f0-9' | head -c 32}^'.webp'
+
+                    case image/jpg*
                         convert $file -resize '1920x1080' -background '#ffffff00' -gravity center -extent 1920x1080 $file.webp
                         mv $file.webp `{dirname $dirdir_file}^'/'^`{cat /dev/urandom | tr -cd 'a-f0-9' | head -c 32}^'.webp'
 
@@ -72,8 +76,8 @@ fn save_page {
 
     # XXX Use a tmp file and  mv(1) to ensure updates are atomic?
     echo $logged_user > $dirdir_verdir/author
-    echo $post_arg_edit_text | dos2unix > $dirdir_verdir/data 
-    echo $post_arg_edit_text | dos2unix > $dirdir_file
+    cat /tmp/$post_arg_edit_text | dos2unix > $dirdir_verdir/data 
+    cat /tmp/$post_arg_edit_text | dos2unix > $dirdir_file
     if (! ~ $#enable_metadata 0) {
         prepare_metadata
     }

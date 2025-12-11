@@ -8,7 +8,7 @@
             if(~ $#post_arg_edit_text 0 && test -f $dirdir_file)
                 cat $dirdir_file | escape_html
             if not
-                echo -n $post_arg_edit_text | escape_html
+                cat /tmp/$post_arg_edit_text | dos2unix | escape_html
 
         %}</textarea>
         <br>
@@ -21,6 +21,7 @@
 % if(! ~ $"post_arg_dirdir_preview '') {
             <h2>Preview:</h2>
             <div id="preview">
-%               echo $post_arg_edit_text | dos2unix | $formatter
+%               cat /tmp/$post_arg_edit_text | dos2unix | $formatter
             </div>
+
 % }
